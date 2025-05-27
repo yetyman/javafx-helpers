@@ -60,7 +60,7 @@ public class PseudoClassHelper {
      * </pre>
      * @param baseName a String.format() template for the PseudoClass name. It will be passed the value of the property.
      */
-    public static DoubleProperty  getPseudoClassDoubleProperty(Node n, String baseName, double defaultValue) {
+    public static DoubleProperty getPseudoClassDoubleProperty(Node n, String baseName, double defaultValue) {
         return new DoublePropertyBase() {
             final Map<Double, PseudoClass> map = new WeakHashMap<>();
             PseudoClass previous = null;
@@ -144,7 +144,7 @@ public class PseudoClassHelper {
      * </pre>
      * @param baseName a String.format() template for the PseudoClass name. It will be passed the value of the property.
      */
-    public static StringProperty  getPseudoClassStringProperty(Node n, String baseName, String defaultValue) {
+    public static StringProperty getPseudoClassStringProperty(Node n, String baseName, String defaultValue) {
         return new StringPropertyBase() {
             final Map<String, PseudoClass> map = new WeakHashMap<>();
             PseudoClass previous = null;
