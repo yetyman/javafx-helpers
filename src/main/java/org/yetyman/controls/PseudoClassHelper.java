@@ -24,7 +24,7 @@ public class PseudoClassHelper {
      *  On false the pseudo class state will be gone
      *  On true the pseudo class state will be applied
      **/
-    public static BooleanProperty getPseudoClassProperty(Node n, String name, boolean defaultValue) {
+    public static BooleanProperty getPseudoClassProperty(Node parentNode, String name, boolean defaultValue) {
         PseudoClass pseudo = PseudoClass.getPseudoClass(name);
 
         return new BooleanPropertyBase(false) {
@@ -35,11 +35,11 @@ public class PseudoClassHelper {
             }
 
             @Override protected void invalidated() {
-                n.pseudoClassStateChanged(pseudo, get());
+                parentNode.pseudoClassStateChanged(pseudo, get());
             }
 
             @Override public Object getBean() {
-                return n;
+                return parentNode;
             }
 
             @Override public String getName() {
@@ -60,7 +60,7 @@ public class PseudoClassHelper {
      * </pre>
      * @param baseName a String.format() template for the PseudoClass name. It will be passed the value of the property.
      */
-    public static DoubleProperty getPseudoClassDoubleProperty(Node n, String baseName, double defaultValue) {
+    public static DoubleProperty getPseudoClassDoubleProperty(Node parentNode, String baseName, double defaultValue) {
         return new DoublePropertyBase() {
             final Map<Double, PseudoClass> map = new WeakHashMap<>();
             PseudoClass previous = null;
@@ -76,13 +76,13 @@ public class PseudoClassHelper {
 
             @Override protected void invalidated() {
                 if(previous != null)
-                    n.pseudoClassStateChanged(previous, false);
+                    parentNode.pseudoClassStateChanged(previous, false);
 
-                n.pseudoClassStateChanged(previous = map.computeIfAbsent(get(), this::findPseudoClass), true);
+                parentNode.pseudoClassStateChanged(previous = map.computeIfAbsent(get(), this::findPseudoClass), true);
             }
 
             @Override public Object getBean() {
-                return n;
+                return parentNode;
             }
 
             @Override public String getName() {
@@ -103,7 +103,7 @@ public class PseudoClassHelper {
      * </pre>
      * @param baseName a String.format() template for the PseudoClass name. It will be passed the value of the property.
      */
-    public static IntegerProperty getPseudoClassIntegerProperty(Node n, String baseName, int defaultValue) {
+    public static IntegerProperty getPseudoClassIntegerProperty(Node parentNode, String baseName, int defaultValue) {
         return new IntegerPropertyBase() {
             final Map<Integer, PseudoClass> map = new WeakHashMap<>();
             PseudoClass previous = null;
@@ -119,13 +119,13 @@ public class PseudoClassHelper {
 
             @Override protected void invalidated() {
                 if(previous != null)
-                    n.pseudoClassStateChanged(previous, false);
+                    parentNode.pseudoClassStateChanged(previous, false);
 
-                n.pseudoClassStateChanged(previous = map.computeIfAbsent(get(), this::findPseudoClass), true);
+                parentNode.pseudoClassStateChanged(previous = map.computeIfAbsent(get(), this::findPseudoClass), true);
             }
 
             @Override public Object getBean() {
-                return n;
+                return parentNode;
             }
 
             @Override public String getName() {
@@ -144,7 +144,7 @@ public class PseudoClassHelper {
      * </pre>
      * @param baseName a String.format() template for the PseudoClass name. It will be passed the value of the property.
      */
-    public static StringProperty getPseudoClassStringProperty(Node n, String baseName, String defaultValue) {
+    public static StringProperty getPseudoClassStringProperty(Node parentNode, String baseName, String defaultValue) {
         return new StringPropertyBase() {
             final Map<String, PseudoClass> map = new WeakHashMap<>();
             PseudoClass previous = null;
@@ -160,14 +160,14 @@ public class PseudoClassHelper {
 
             @Override protected void invalidated() {
                 if(previous != null)
-                    n.pseudoClassStateChanged(previous, false);
+                    parentNode.pseudoClassStateChanged(previous, false);
 
                 if (get() != null)
-                    n.pseudoClassStateChanged(previous = map.computeIfAbsent(get(), this::findPseudoClass), true);
+                    parentNode.pseudoClassStateChanged(previous = map.computeIfAbsent(get(), this::findPseudoClass), true);
             }
 
             @Override public Object getBean() {
-                return n;
+                return parentNode;
             }
 
             @Override public String getName() {
@@ -186,7 +186,7 @@ public class PseudoClassHelper {
      * </pre>
      * @param baseName a String.format() template for the PseudoClass name. It will be passed the value of the property.
      */
-    public static <T> ObjectProperty<T> getPseudoClassObjectProperty(Node n, String baseName, T defaultValue) {
+    public static <T> ObjectProperty<T> getPseudoClassObjectProperty(Node parentNode, String baseName, T defaultValue) {
         return new ObjectPropertyBase<T>() {
             final Map<String, PseudoClass> map = new WeakHashMap<>();
             PseudoClass previous = null;
@@ -202,14 +202,14 @@ public class PseudoClassHelper {
 
             @Override protected void invalidated() {
                 if(previous != null)
-                    n.pseudoClassStateChanged(previous, false);
+                    parentNode.pseudoClassStateChanged(previous, false);
 
                 if(get() != null)
-                    n.pseudoClassStateChanged(previous = map.computeIfAbsent(String.format(baseName, get()), this::findPseudoClass), true);
+                    parentNode.pseudoClassStateChanged(previous = map.computeIfAbsent(String.format(baseName, get()), this::findPseudoClass), true);
             }
 
             @Override public Object getBean() {
-                return n;
+                return parentNode;
             }
 
             @Override public String getName() {
