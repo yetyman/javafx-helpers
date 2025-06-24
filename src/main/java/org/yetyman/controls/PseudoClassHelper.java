@@ -24,7 +24,7 @@ public class PseudoClassHelper {
      *  On false the pseudo class state will be gone
      *  On true the pseudo class state will be applied
      **/
-    public static BooleanProperty getPseudoClassProperty(Node parentNode, String name, boolean defaultValue) {
+    public static BooleanProperty createPseudoClassProperty(Node parentNode, String name, boolean defaultValue) {
         PseudoClass pseudo = PseudoClass.getPseudoClass(name);
 
         return new BooleanPropertyBase(false) {
@@ -56,11 +56,11 @@ public class PseudoClassHelper {
      * The parallel in HTML CSS would be :nth-child(2), though we have total freedom over the format here and this
      * property will format your double any way you specify with String.format() rules.
      *
-     * This property cannot be null, but the same effect can be achieved with nullability using {@link #getPseudoClassObjectProperty(Node, String, Object)}
+     * This property cannot be null, but the same effect can be achieved with nullability using {@link #createPseudoClassObjectProperty(Node, String, Object)}
      * </pre>
      * @param baseName a String.format() template for the PseudoClass name. It will be passed the value of the property.
      */
-    public static DoubleProperty getPseudoClassDoubleProperty(Node parentNode, String baseName, double defaultValue) {
+    public static DoubleProperty createPseudoClassDoubleProperty(Node parentNode, String baseName, double defaultValue) {
         return new DoublePropertyBase() {
             final Map<Double, PseudoClass> map = new WeakHashMap<>();
             PseudoClass previous = null;
@@ -99,11 +99,11 @@ public class PseudoClassHelper {
      * The parallel in HTML CSS would be :nth-child(2), though we have total freedom over the format here and this
      * property will format your double any way you specify with String.format() rules.
      *
-     * This property cannot be null, but the same effect can be achieved with nullability using {@link #getPseudoClassObjectProperty(Node, String, Object)}
+     * This property cannot be null, but the same effect can be achieved with nullability using {@link #createPseudoClassObjectProperty(Node, String, Object)}
      * </pre>
      * @param baseName a String.format() template for the PseudoClass name. It will be passed the value of the property.
      */
-    public static IntegerProperty getPseudoClassIntegerProperty(Node parentNode, String baseName, int defaultValue) {
+    public static IntegerProperty createPseudoClassIntegerProperty(Node parentNode, String baseName, int defaultValue) {
         return new IntegerPropertyBase() {
             final Map<Integer, PseudoClass> map = new WeakHashMap<>();
             PseudoClass previous = null;
@@ -144,7 +144,7 @@ public class PseudoClassHelper {
      * </pre>
      * @param baseName a String.format() template for the PseudoClass name. It will be passed the value of the property.
      */
-    public static StringProperty getPseudoClassStringProperty(Node parentNode, String baseName, String defaultValue) {
+    public static StringProperty createPseudoClassStringProperty(Node parentNode, String baseName, String defaultValue) {
         return new StringPropertyBase() {
             final Map<String, PseudoClass> map = new WeakHashMap<>();
             PseudoClass previous = null;
@@ -186,7 +186,7 @@ public class PseudoClassHelper {
      * </pre>
      * @param baseName a String.format() template for the PseudoClass name. It will be passed the value of the property.
      */
-    public static <T> ObjectProperty<T> getPseudoClassObjectProperty(Node parentNode, String baseName, T defaultValue) {
+    public static <T> ObjectProperty<T> createPseudoClassObjectProperty(Node parentNode, String baseName, T defaultValue) {
         return new ObjectPropertyBase<T>() {
             final Map<String, PseudoClass> map = new WeakHashMap<>();
             PseudoClass previous = null;

@@ -11,9 +11,6 @@ public class FXMLHelper {
     public static <T> T loadFXML(String fxml) {
         return FXMLHelper.loadFXML(fxml, null);
     }
-    public static <T> T loadFXML(String fxml, T controller) {
-        return FXMLHelper.loadFXML(fxml, controller, null);
-    }
 
     /**
      * Allow FXML to be loaded to an already initialized class.
@@ -21,18 +18,17 @@ public class FXMLHelper {
      * unneeded separations or order of initialization concerns.
      * @param fxml the name of the fxml file to load
      * @param controller an @FXML annotated instance of the controller class to have FXML fields loaded into
-     * @param bundle the resource bundle to use for localization
      * @return returns controller parameter if non-null and a new instance of the loaded FXML controller class if not
      * @param <T> The type of the FXML's controller class
      */
-    public static <T> T loadFXML(String fxml, T controller, ResourceBundle bundle) {
+    public static <T> T loadFXML(String fxml, T controller) {
         Class<?> clazz = null;
         if(controller != null)
             clazz = controller.getClass();
         else
             clazz = FXMLHelper.class;
 
-        FXMLLoader loader = new FXMLLoader(clazz.getResource(fxml), bundle);
+        FXMLLoader loader = new FXMLLoader(clazz.getResource(fxml));
         if (controller != null) {
             loader.setRoot(controller);
 //            loader.setClassLoader(controller.getClass().getClassLoader());
